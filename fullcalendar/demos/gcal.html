@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+	html, body{
+		height:100%;
+	}
+	
+	table div div {
+		overflow: inherit !important;
+		white-space: normal !important;
+		font-size:.85em;
+		position: absolute;
+	}
+	
+	.calendar { 
+		max-height:48%;
+		background-color:red;
+	}
+	
+	.fc-day-grid-container.fc-scroller {
+    height: auto!important;
+    overflow-y: auto;
+}
+</style>
+
+
+<meta charset='utf-8' />
+<link href='../fullcalendar.css' rel='stylesheet' />
+<link href='../fullcalendar.print.min.css' rel='stylesheet' media='print' />
+<script src='../lib/moment.min.js'></script>
+<script src='../lib/jquery.min.js'></script>
+<script src='../fullcalendar.min.js'></script>
+<script src='../gcal.min.js'></script>
+<script>
+	$(document).ready(function() {
+	
+		$('#calendar1').fullCalendar({
+			height: $(calendar).height(),
+			header: {
+				left: 'prev,next',
+				center: 'title',
+				right: ''
+			},
+
+			displayEventTime: true, // don't show the time column in list view
+
+			// THIS KEY WON'T WORK IN PRODUCTION!!!
+			// To make your own Google API key, follow the directions here:
+			// http://fullcalendar.io/docs/google_calendar/
+			googleCalendarApiKey: 'AIzaSyCJEH4H__jgs5cBl18KVet6HyHTHA0I2oI',
+		
+			// Calendar Key
+			events: 'mpq9ttb23nhmea4a7qhprgajs8@group.calendar.google.com',
+			
+			loading: function(bool) {
+				$('#loading').toggle(bool);
+			}
+			
+		});
+		
+		$('#calendar2').fullCalendar({
+			height: $(calendar).height(),
+			header: {
+				left: 'prev,next',
+				center: 'title',
+				right: ''
+			},
+
+			displayEventTime: true, // don't show the time column in list view
+
+			// THIS KEY WON'T WORK IN PRODUCTION!!!
+			// To make your own Google API key, follow the directions here:
+			// http://fullcalendar.io/docs/google_calendar/
+			googleCalendarApiKey: 'AIzaSyCJEH4H__jgs5cBl18KVet6HyHTHA0I2oI',
+		
+			// Calendar Key
+			events: 'mpq9ttb23nhmea4a7qhprgajs8@group.calendar.google.com',
+			
+			loading: function(bool) {
+				$('#loading').toggle(bool);
+			}
+			
+		});
+		
+		$('#calendar3').fullCalendar({
+			height: $(calendar).height(),
+			header: {
+				left: 'prev,next',
+				center: 'title',
+				right: ''
+			},
+
+			displayEventTime: true, // don't show the time column in list view
+
+			// THIS KEY WON'T WORK IN PRODUCTION!!!
+			// To make your own Google API key, follow the directions here:
+			// http://fullcalendar.io/docs/google_calendar/
+			googleCalendarApiKey: 'AIzaSyCJEH4H__jgs5cBl18KVet6HyHTHA0I2oI',
+		
+			// Calendar Key
+			events: 'mpq9ttb23nhmea4a7qhprgajs8@group.calendar.google.com',
+			
+			loading: function(bool) {
+				$('#loading').toggle(bool);
+			}
+			
+		});
+		
+		$('#calendar4').fullCalendar({
+			height: $(calendar).height(),
+			header: {
+				left: 'prev,next',
+				center: 'title',
+				right: ''
+			},
+
+			displayEventTime: true, // don't show the time column in list view
+
+			// THIS KEY WON'T WORK IN PRODUCTION!!!
+			// To make your own Google API key, follow the directions here:
+			// http://fullcalendar.io/docs/google_calendar/
+			googleCalendarApiKey: 'AIzaSyCJEH4H__jgs5cBl18KVet6HyHTHA0I2oI',
+		
+			// Calendar Key
+			events: 'mpq9ttb23nhmea4a7qhprgajs8@group.calendar.google.com',
+			
+			loading: function(bool) {
+				$('#loading').toggle(bool);
+			}
+			
+		});
+	});
+
+</script>
+
+</head>
+<body>
+
+
+<div class="calendar" id="calendar" style="position: relative; width:39%; height:48%; float:left; padding:0px 1px;">
+	<div id='calendar1'></div>
+</div>
+<div id="calendar" style="width:39%; height:48%; float:left; padding:1px;">
+	<div id='calendar2'></div>
+</div>
+<!--
+<div id="schedule" style="border:1px solid black; width:20%; height:100%; float:right; padding: 1px; padding-right:4px;">
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQefSiJvjO0_hIcNLzS_ChZiPs6xM4o2jp3NfzM28HM5ONfGxBD6DqpOGmugLpEebtZZXbQZRBlTMYs/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="100%"></iframe>
+</div>
+!-->
+<div id="calendar" style="width:39%; height:48%; float:left; padding:10px 1px;">
+	<div id='calendar3'></div>
+</div>
+<div id="calendar" style="width:39%; height:48%; float:left; padding:10px 1px;">
+	<div id='calendar4'></div>
+</div>
+
+
+
+</body>
+</html>
