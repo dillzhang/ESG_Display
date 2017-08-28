@@ -2,10 +2,21 @@
 <html>
 <head>
 
+<!-- REFERENCES -->
+<meta charset='utf-8' />
+<link href='../fullcalendar.css' rel='stylesheet' />
+<link href='../fullcalendar.print.min.css' rel='stylesheet' media='print' />
+<script src='../lib/moment.min.js'></script>
+<script src='../lib/jquery.min.js'></script>
+<script src='../fullcalendar.min.js'></script>
+<script src='../gcal.min.js'></script>
+
+<!-- CSS !-->
 <style>
 	html, body{
 		height:100%;
 		overflow:hidden;
+		background-color: gray;
 	}
 	
 	table div div {
@@ -15,6 +26,14 @@
 		position: relative;
 		
 	}
+
+	iframe{
+		overflow-x:hidden;
+	}
+	:-webkit-scrollbar {
+		overflow-x: hidden;
+		display:none;
+	}
 	
 	.calendar { 
 		height:46%;
@@ -22,7 +41,34 @@
 		float: left;
 		display: inline-block;
 		overflow:hidden;
-		
+		width:43%; 
+		height:46%; 
+		float:left;
+		-webkit-box-sizing: border-box;
+   		-moz-box-sizing: border-box;
+        box-sizing: border-box;
+	}
+
+	.agenda {
+		width:86%;
+		height:93%;
+		float:left;
+		padding-left:1px;
+		padding-right:1px;
+		padding-bottom:10px;
+		-webkit-box-sizing: border-box;
+   		-moz-box-sizing: border-box;
+        box-sizing: border-box;
+	}
+
+	.schedule {
+		border:1px solid gray;
+		width:12%;
+		height:92%;
+		float:right;
+		padding-left: 1px;
+		padding-right:4px;
+		padding-bottom:10px;
 	}
 	
 	.fc-day-grid-container.fc-scroller {
@@ -33,31 +79,46 @@
 </style>
 
 
-<meta charset='utf-8' />
-<link href='../fullcalendar.css' rel='stylesheet' />
-<link href='../fullcalendar.print.min.css' rel='stylesheet' media='print' />
-<script src='../lib/moment.min.js'></script>
-<script src='../lib/jquery.min.js'></script>
-<script src='../fullcalendar.min.js'></script>
-<script src='../gcal.min.js'></script>
+<!-- JQUERY !-->
 <script>
 	$(document).ready(function() {
+		//Function to refresh page at certain time
+		function refreshAt(hours, minutes, seconds) {
+	    var now = new Date();
+	    var then = new Date();
+
+	    if(now.getHours() > hours ||
+	       (now.getHours() == hours && now.getMinutes() > minutes) ||
+	        now.getHours() == hours && now.getMinutes() == minutes && now.getSeconds() >= seconds) {
+	        then.setDate(now.getDate() + 1);
+	    }
+	    then.setHours(hours);
+	    then.setMinutes(minutes);
+	    then.setSeconds(seconds);
+
+	    var timeout = (then.getTime() - now.getTime());
+	    setTimeout(function() { window.location.reload(true); }, timeout);
+		}
+
+		//Refreshes page  at beginning of each day
+		refreshAt(0,01,0);
+
+		//Upper left calendar (calendar 1)
 		$('#calendar1').fullCalendar({
-			height: $(calendar).height(),
+			height: $('#calendar').height(),
+			
 			header: {
 				left: '',
 				center: 'title',
 				right: ''
 			},
 
-			displayEventTime: true, // don't show the time column in list view
+			displayEventTime: false, // don't show the time column in list view
 
-			// THIS KEY WON'T WORK IN PRODUCTION!!!
-			// To make your own Google API key, follow the directions here:
-			// http://fullcalendar.io/docs/google_calendar/
+			//Google Developer API Key
 			googleCalendarApiKey: 'AIzaSyCJEH4H__jgs5cBl18KVet6HyHTHA0I2oI',
 		
-			// Calendar Key
+			//Calendar Key
 			events: 'mpq9ttb23nhmea4a7qhprgajs8@group.calendar.google.com',
 			
 			loading: function(bool) {
@@ -66,8 +127,12 @@
 			
 		});
 		
+
+
+		//Upper right calendar (calendar 2)
 		$('#calendar2').fullCalendar({
-			height: $(calendar).height(),
+			height: $('#calendar').height(),
+			
 			header: {
 				left: '',
 				center: 'title',
@@ -75,14 +140,12 @@
 			},
 			
 
-			displayEventTime: true, // don't show the time column in list view
+			displayEventTime: false, // don't show the time column in list view
 
-			// THIS KEY WON'T WORK IN PRODUCTION!!!
-			// To make your own Google API key, follow the directions here:
-			// http://fullcalendar.io/docs/google_calendar/
+			//Google Developer API Key
 			googleCalendarApiKey: 'AIzaSyCJEH4H__jgs5cBl18KVet6HyHTHA0I2oI',
 		
-			// Calendar Key
+			//Calendar Key
 			events: 'mpq9ttb23nhmea4a7qhprgajs8@group.calendar.google.com',
 			
 			loading: function(bool) {
@@ -91,19 +154,21 @@
 			
 		});
 		
+
+
+		//Lower left calendar (calendar 3)
 		$('#calendar3').fullCalendar({
-			height: $(calendar).height(),
+			height: $('#calendar').height(),
+			
 			header: {
 				left: '',
 				center: 'title',
 				right: ''
 			},
 
-			displayEventTime: true, // don't show the time column in list view
+			displayEventTime: false, // don't show the time column in list view
 
-			// THIS KEY WON'T WORK IN PRODUCTION!!!
-			// To make your own Google API key, follow the directions here:
-			// http://fullcalendar.io/docs/google_calendar/
+			//Google Developer API Key
 			googleCalendarApiKey: 'AIzaSyCJEH4H__jgs5cBl18KVet6HyHTHA0I2oI',
 		
 			// Calendar Key
@@ -115,8 +180,11 @@
 			
 		});
 		
+
+		//Lower right calendar (calendar 4)
 		$('#calendar4').fullCalendar({
-			height: $(calendar).height(),
+			height: $('#calendar').height(),
+			
 			header: {
 				left: '',
 				center: 'title',
@@ -125,9 +193,7 @@
 
 			displayEventTime: true, // don't show the time column in list view
 
-			// THIS KEY WON'T WORK IN PRODUCTION!!!
-			// To make your own Google API key, follow the directions here:
-			// http://fullcalendar.io/docs/google_calendar/
+			//Google Developer API Key
 			googleCalendarApiKey: 'AIzaSyCJEH4H__jgs5cBl18KVet6HyHTHA0I2oI',
 		
 			// Calendar Key
@@ -139,26 +205,30 @@
 			
 		});
 
+
+		//Agenda view (hidden by default)
 		$('#agenda').fullCalendar({
     		defaultView: 'list',
-		height: $('.agenda').height(),
-		noEventsMessage: "No events to display.",
-		header: {
+			height: $('.agenda').height(),
+			noEventsMessage: "No events to display.",
+			
+			header: {
 				left: 'title',
 				center: '',
 				right: ''
 			},
+    		
+    		//Sets range to current day to 30 days from current day
     		visibleRange: function(currentDate) {
         		return {
-            			start: currentDate.clone().subtract(0, 'days'),
+            			start: currentDate.clone(),
             			end: currentDate.clone().add(30, 'days') // exclusive end, so 30
         		};
 			},
-			displayEventTime: true, // don't show the time column in list view
 
-			// THIS KEY WON'T WORK IN PRODUCTION!!!
-			// To make your own Google API key, follow the directions here:
-			// http://fullcalendar.io/docs/google_calendar/
+			displayEventTime: true, //show the time column in list view
+
+			//Google Developer API Key
 			googleCalendarApiKey: 'AIzaSyCJEH4H__jgs5cBl18KVet6HyHTHA0I2oI',
 		
 			// Calendar Key
@@ -170,6 +240,8 @@
 
 		});
 
+
+		//Brings calendars 2-4 to correct month
 		$('#calendar2').fullCalendar('next');
 		$('#calendar3').fullCalendar('next');
 		$('#calendar3').fullCalendar('next');
@@ -177,28 +249,49 @@
 		$('#calendar4').fullCalendar('next');
 		$('#calendar4').fullCalendar('next');
 
+		//Hides agenda
 		$(".agenda").toggle();
 		$("#agenda").toggle();
 		
 
+		//Function that cycles between calendar and agenda
 		setInterval(function() {
-			$(".calendar").fadeToggle(2500);
-			$("#calendar1").fadeToggle(2500);
-			$("#calendar2").fadeToggle(2500);
-			$("#calendar3").fadeToggle(2500);
-			$("#calendar4").fadeToggle(2500);
-			setTimeout(function() {
+			//Checks if calendar is current displayed
+				if( $("#agenda").css('display') == 'none') {
+				
+				//Toggles calendar first (with 2.5sec fade)
+				$(".calendar").fadeToggle(2500);
+				$("#calendar1").fadeToggle(2500);
+				$("#calendar2").fadeToggle(2500);
+				$("#calendar3").fadeToggle(2500);
+				$("#calendar4").fadeToggle(2500);
+	
+				//Waits 2.5 seconds and then toggles agenda (with 2.5sec fade)
+				$(".agenda").delay(2500).fadeToggle(2500);
+				$("#agenda").delay(2500).fadeToggle(2500);
+	
+				//Refreshes events on agenda
+				$('#agenda').fullCalendar( 'refetchEvents' );
+			} else { //agenda is currently displayed
+				
+				//Toggles agenda first
 				$(".agenda").fadeToggle(2500);
-				$(".agenda").css("height", "93%");
 				$("#agenda").fadeToggle(2500);
-			},2500);
-			$('#calendar1').fullCalendar( 'refetchEvents' );
-			$('#calendar2').fullCalendar( 'refetchEvents' );
-			$('#calendar3').fullCalendar( 'refetchEvents' );
-			$('#calendar4').fullCalendar( 'refetchEvents' );
-			$('#agenda').fullCalendar( 'refetchEvents' );
-	      		// Do something every 10 seconds
-		}, 10000);
+
+				//Waits 2.5 seconds and then toggles calendar
+				$(".calendar").delay(2500).fadeToggle(2500);
+				$("#calendar1").delay(2500).fadeToggle(2500);
+				$("#calendar2").delay(2500).fadeToggle(2500);
+				$("#calendar3").delay(2500).fadeToggle(2500);
+				$("#calendar4").delay(2500).fadeToggle(2500);
+
+				//Refreshes events on calendars
+				$('#calendar1').fullCalendar( 'refetchEvents' );
+				$('#calendar2').fullCalendar( 'refetchEvents' );
+				$('#calendar3').fullCalendar( 'refetchEvents' );
+				$('#calendar4').fullCalendar( 'refetchEvents' );
+			}
+		}, 6000);
 	});
 
 </script>
@@ -206,32 +299,42 @@
 </head>
 <body>
 
+
+<!-- TOP BANNER !-->
 <div style="width:99%; height:5%; text-align:center; float:left; padding:0px 1px;">
     <h3> ESG Calendar and Schedule</h3>
 </div>
 
-<div class="calendar" id="calendar" style="width:43%; height:46%; float:left; padding:0px 1px;">
-	<div id='calendar1'></div>
+
+<!-- CALENDAR 1&2 !-->
+<div class="calendar" id="calendar" style="padding-top:0px; padding-bottom:0px; padding-left:4px; padding-right:1px;">
+	<div id='calendar1' style="background-color:white;"></div>
 </div>
 
-<div class="calendar" style="width:43%; height:46%; float:left; padding:0px 1px;">
-	<div id='calendar2'></div>
+<div class="calendar" style="padding:0px 1px;">
+	<div id='calendar2' style="background-color:white;"></div>
 </div>
 
-<div id="schedule" style="border:none; width:12%; height:93%; float:right; padding-left: 1px; padding-right:4px; padding-bottom:10px;">
-    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQefSiJvjO0_hIcNLzS_ChZiPs6xM4o2jp3NfzM28HM5ONfGxBD6DqpOGmugLpEebtZZXbQZRBlTMYs/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="100%"></iframe>
+
+<!-- SCHEDULE -->
+<div class="schedule">
+    <iframe frameborder='0' scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQefSiJvjO0_hIcNLzS_ChZiPs6xM4o2jp3NfzM28HM5ONfGxBD6DqpOGmugLpEebtZZXbQZRBlTMYs/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="100%"></iframe>
 </div>
 
-<div class="calendar" style="width:43%; height:46%; float:left; padding:10px 1px;">
-	<div id='calendar3'></div>
+
+<!-- CALENDAR 3&4 !-->
+<div class="calendar" style="padding-top:10px; padding-bottom:10px; padding-left:4px; padding-right:1px;">
+	<div id='calendar3' style="background-color:white;"></div>
 </div>
 
-<div class="calendar" style="width:43%; height:46%; float:left; padding:10px 1px;">
-	<div id='calendar4'></div>
+<div class="calendar" style="padding:10px 1px;">
+	<div id='calendar4' style="background-color:white;"></div>
 </div>
 
-<div class="agenda" style="background-color: none; width:86%; height:93%; float:left; padding-left:1px; padding-right:1px; padding-bottom:10px;">
-	<div id='agenda'></div>
+
+<!-- AGENDA -->
+<div class="agenda" style="">
+	<div id='agenda' style="background-color:white; padding:20px;"></div>
 </div>
 
 
