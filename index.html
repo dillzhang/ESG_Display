@@ -16,7 +16,7 @@
 	html, body{
 		height:100%;
 		overflow:hidden;
-		background-color: gray;
+		background-color: white;
 	}
 	
 	table div div {
@@ -27,15 +27,19 @@
 		
 	}
 
+	.main {
+		float: left;
+		height: 90%;
+		width: 85%;
+	}
 	
 	.calendar { 
-		height:46%;
+		height:48%;
 		border:none;
 		float: left;
 		display: inline-block;
 		overflow:hidden;
-		width:43.5%; 
-		height:46%; 
+		width:48%; 
 		float:left;
 		-webkit-box-sizing: border-box;
    		-moz-box-sizing: border-box;
@@ -43,8 +47,8 @@
 	}
 
 	.agenda {
-		width:87%;
-		height:91%;
+		width:96%;
+		height:96%;
 		float:left;
 		padding-left:1px;
 		padding-right:1px;
@@ -243,36 +247,35 @@
 		$('#calendar4').fullCalendar('next');
 
 		//Hides agenda
-		$(".agenda").toggle();
-		$("#agenda").toggle();
+		$("#agenda_div").toggle();
 		
 
 		//Function that cycles between calendar and agenda
 		setInterval(function() {
 			//Checks if calendar is current displayed
-				if( $("#agenda").css('display') == 'none') {
+				if( $("#agenda_div").css('display') == 'none') {
 				
 				//Toggles calendar first (with 2.5sec fade)
-				$(".calendar").fadeToggle(2500);
+				$("#calendar_div").fadeToggle(2500);
 				$("#calendar1").fadeToggle(2500);
 				$("#calendar2").fadeToggle(2500);
 				$("#calendar3").fadeToggle(2500);
 				$("#calendar4").fadeToggle(2500);
 	
 				//Waits 2.5 seconds and then toggles agenda (with 2.5sec fade)
-				$(".agenda").delay(2500).fadeToggle(2500);
-				$("#agenda").delay(2500).fadeToggle(2500);
+				$("#agenda_div").delay(2500).fadeToggle(2500);
+				// $("#agenda").delay(2500).fadeToggle(2500);
 	
 				//Refreshes events on agenda
-				$('#agenda').fullCalendar( 'refetchEvents' );
+				//$('#agenda').fullCalendar( 'refetchEvents' );
 			} else { //agenda is currently displayed
 				
 				//Toggles agenda first
-				$(".agenda").fadeToggle(2500);
-				$("#agenda").fadeToggle(2500);
+				$("#agenda_div").fadeToggle(2500);
+				//$("#agenda").fadeToggle(2500);
 
 				//Waits 2.5 seconds and then toggles calendar
-				$(".calendar").delay(2500).fadeToggle(2500);
+				$("#calendar_div").delay(2500).fadeToggle(2500);
 				$("#calendar1").delay(2500).fadeToggle(2500);
 				$("#calendar2").delay(2500).fadeToggle(2500);
 				$("#calendar3").delay(2500).fadeToggle(2500);
@@ -300,35 +303,38 @@
 
 
 <!-- CALENDAR 1&2 !-->
-<div class="calendar" id="calendar" style="padding-top:0px; padding-bottom:0px; padding-left:4px; padding-right:1px;">
-	<div id='calendar1' style="background-color:white;"></div>
+<div class="main" id="calendar_div">
+	<div class="calendar" id="calendar" style="padding-top:0px; padding-bottom:0px; padding-left:4px; padding-right:1px;">
+		<div id='calendar1' style="background-color:white;"></div>
+	</div>
+
+	<div class="calendar" style="padding:0px 1px;">
+		<div id='calendar2' style="background-color:white;"></div>
+	</div>
+
+
+	<!-- CALENDAR 3&4 !-->
+	<div class="calendar" style="padding-top:10px; padding-bottom:10px; padding-left:4px; padding-right:1px;">
+		<div id='calendar3' style="background-color:white;"></div>
+	</div>
+
+	<div class="calendar" style="padding:10px 1px;">
+		<div id='calendar4' style="background-color:white;"></div>
+	</div>
 </div>
 
-<div class="calendar" style="padding:0px 1px;">
-	<div id='calendar2' style="background-color:white;"></div>
+<!-- AGENDA -->
+<div class="main" id="agenda_div">
+	<div class="agenda" style="">
+		<div id='agenda' style="background-color:white; padding-left:20px; padding-right:20px; padding-top:20px;"></div>
+	</div>
 </div>
-
 
 <!-- SCHEDULE -->
 <div class="schedule">
     <iframe frameborder='0' scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQefSiJvjO0_hIcNLzS_ChZiPs6xM4o2jp3NfzM28HM5ONfGxBD6DqpOGmugLpEebtZZXbQZRBlTMYs/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="100%"></iframe>
 </div>
 
-
-<!-- CALENDAR 3&4 !-->
-<div class="calendar" style="padding-top:10px; padding-bottom:10px; padding-left:4px; padding-right:1px;">
-	<div id='calendar3' style="background-color:white;"></div>
-</div>
-
-<div class="calendar" style="padding:10px 1px;">
-	<div id='calendar4' style="background-color:white;"></div>
-</div>
-
-
-<!-- AGENDA -->
-<div class="agenda" style="">
-	<div id='agenda' style="background-color:white; padding-left:20px; padding-right:20px; padding-top:20px;"></div>
-</div>
 
 
 
