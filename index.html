@@ -18,29 +18,29 @@
 		overflow:hidden;
 		background-color: white;
 	}
-	
+
 	table div div {
 		overflow: auto!important;
 		white-space: normal!important;
 		font-size:.85em;
 		position: relative;
-		
+
 	}
 
 	.main {
-		float: left;
-		height: 90%;
-		width: 85%;
+		position: absolute;
+		height: 92%;
+		width: 86%;
 	}
-	
-	.calendar { 
+
+	.calendar {
 		height:48%;
+		width:48%;
+        padding:2px;
 		border:none;
 		float: left;
 		display: inline-block;
 		overflow:hidden;
-		width:48%; 
-		float:left;
 		-webkit-box-sizing: border-box;
    		-moz-box-sizing: border-box;
         box-sizing: border-box;
@@ -59,15 +59,13 @@
 	}
 
 	.schedule {
-		border:1px solid gray;
-		width:12%;
+		border:none;
+		width:14%;
 		height:92%;
-		float:right;
-		padding-left: 1px;
-		padding-right:4px;
-		padding-bottom:10px;
+		float:left;
+        padding: 1px;
 	}
-	
+
 	.fc-day-grid-container.fc-scroller {
     		height: auto!important;
     		overflow-y: auto;
@@ -103,7 +101,8 @@
 		//Upper left calendar (calendar 1)
 		$('#calendar1').fullCalendar({
 			height: $('#calendar').height(),
-			
+            showNonCurrentDates: false,
+
 			header: {
 				left: '',
 				center: 'title',
@@ -114,49 +113,51 @@
 
 			//Google Developer API Key
 			googleCalendarApiKey: 'AIzaSyCJEH4H__jgs5cBl18KVet6HyHTHA0I2oI',
-		
+
 			//Calendar Key
 			events: 'mpq9ttb23nhmea4a7qhprgajs8@group.calendar.google.com',
-			
+
 			loading: function(bool) {
 				$('#loading').toggle(bool);
 			}
-			
+
 		});
-		
+
 
 
 		//Upper right calendar (calendar 2)
 		$('#calendar2').fullCalendar({
 			height: $('#calendar').height(),
-			
+            showNonCurrentDates: false,
+
 			header: {
 				left: '',
 				center: 'title',
 				right: ''
 			},
-			
+
 
 			displayEventTime: false, // don't show the time column in list view
 
 			//Google Developer API Key
 			googleCalendarApiKey: 'AIzaSyCJEH4H__jgs5cBl18KVet6HyHTHA0I2oI',
-		
+
 			//Calendar Key
 			events: 'mpq9ttb23nhmea4a7qhprgajs8@group.calendar.google.com',
-			
+
 			loading: function(bool) {
 				$('#loading').toggle(bool);
 			}
-			
+
 		});
-		
+
 
 
 		//Lower left calendar (calendar 3)
 		$('#calendar3').fullCalendar({
 			height: $('#calendar').height(),
-			
+            showNonCurrentDates: false,
+
 			header: {
 				left: '',
 				center: 'title',
@@ -167,21 +168,22 @@
 
 			//Google Developer API Key
 			googleCalendarApiKey: 'AIzaSyCJEH4H__jgs5cBl18KVet6HyHTHA0I2oI',
-		
+
 			// Calendar Key
 			events: 'mpq9ttb23nhmea4a7qhprgajs8@group.calendar.google.com',
-			
+
 			loading: function(bool) {
 				$('#loading').toggle(bool);
 			}
-			
+
 		});
-		
+
 
 		//Lower right calendar (calendar 4)
 		$('#calendar4').fullCalendar({
 			height: $('#calendar').height(),
-			
+            showNonCurrentDates: false,
+
 			header: {
 				left: '',
 				center: 'title',
@@ -192,14 +194,14 @@
 
 			//Google Developer API Key
 			googleCalendarApiKey: 'AIzaSyCJEH4H__jgs5cBl18KVet6HyHTHA0I2oI',
-		
+
 			// Calendar Key
 			events: 'mpq9ttb23nhmea4a7qhprgajs8@group.calendar.google.com',
-			
+
 			loading: function(bool) {
 				$('#loading').toggle(bool);
 			}
-			
+
 		});
 
 
@@ -208,13 +210,13 @@
     		defaultView: 'list',
 			height: $('.agenda').height(),
 			noEventsMessage: "No events to display.",
-			
+
 			header: {
 				left: 'title',
 				center: '',
 				right: ''
 			},
-    		
+
     		//Sets range to current day to 30 days from current day
     		visibleRange: function(currentDate) {
         		return {
@@ -227,10 +229,10 @@
 
 			//Google Developer API Key
 			googleCalendarApiKey: 'AIzaSyCJEH4H__jgs5cBl18KVet6HyHTHA0I2oI',
-		
+
 			// Calendar Key
 			events: 'mpq9ttb23nhmea4a7qhprgajs8@group.calendar.google.com',
-			
+
 			loading: function(bool) {
 				$('#loading').toggle(bool);
 			}
@@ -248,38 +250,39 @@
 
 		//Hides agenda
 		$("#agenda_div").toggle();
-		
+
 
 		//Function that cycles between calendar and agenda
 		setInterval(function() {
 			//Checks if calendar is current displayed
 				if( $("#agenda_div").css('display') == 'none') {
-				
+
 				//Toggles calendar first (with 2.5sec fade)
 				$("#calendar_div").fadeToggle(2500);
-				$("#calendar1").fadeToggle(2500);
-				$("#calendar2").fadeToggle(2500);
-				$("#calendar3").fadeToggle(2500);
-				$("#calendar4").fadeToggle(2500);
-	
+				// $("#calendar1").fadeToggle(2500);
+				// $("#calendar2").fadeToggle(2500);
+				// $("#calendar3").fadeToggle(2500);
+				// $("#calendar4").fadeToggle(2500);
+
 				//Waits 2.5 seconds and then toggles agenda (with 2.5sec fade)
-				$("#agenda_div").delay(2500).fadeToggle(2500);
+				$("#agenda_div").fadeToggle(2500);
 				// $("#agenda").delay(2500).fadeToggle(2500);
-	
+
 				//Refreshes events on agenda
-				//$('#agenda').fullCalendar( 'refetchEvents' );
+				$('#agenda').fullCalendar( 'refetchEvents' );
+                $('#sheets').attr('src', $('#sheets').attr('src'));
 			} else { //agenda is currently displayed
-				
+
 				//Toggles agenda first
 				$("#agenda_div").fadeToggle(2500);
 				//$("#agenda").fadeToggle(2500);
 
 				//Waits 2.5 seconds and then toggles calendar
-				$("#calendar_div").delay(2500).fadeToggle(2500);
-				$("#calendar1").delay(2500).fadeToggle(2500);
-				$("#calendar2").delay(2500).fadeToggle(2500);
-				$("#calendar3").delay(2500).fadeToggle(2500);
-				$("#calendar4").delay(2500).fadeToggle(2500);
+				$("#calendar_div").fadeToggle(2500);
+				// $("#calendar1").delay(2500).fadeToggle(2500);
+				// $("#calendar2").delay(2500).fadeToggle(2500);
+				// $("#calendar3").delay(2500).fadeToggle(2500);
+				// $("#calendar4").delay(2500).fadeToggle(2500);
 
 				//Refreshes events on calendars
 				$('#calendar1').fullCalendar( 'refetchEvents' );
@@ -297,43 +300,49 @@
 
 
 <!-- TOP BANNER !-->
-<div style="width:100%; height:5%; text-align:center; float:left; padding:0px 1px; ">
+<div style="width:100%; height:5%; text-align:center; float:left; padding:2px; ">
     <img src="photos/banner.png" style="max-height:100%; max-width:100%;">
 </div>
 
-
-<!-- CALENDAR 1&2 !-->
-<div class="main" id="calendar_div">
-	<div class="calendar" id="calendar" style="padding-top:0px; padding-bottom:0px; padding-left:4px; padding-right:1px;">
-		<div id='calendar1' style="background-color:white;"></div>
-	</div>
-
-	<div class="calendar" style="padding:0px 1px;">
-		<div id='calendar2' style="background-color:white;"></div>
-	</div>
-
-
-	<!-- CALENDAR 3&4 !-->
-	<div class="calendar" style="padding-top:10px; padding-bottom:10px; padding-left:4px; padding-right:1px;">
-		<div id='calendar3' style="background-color:white;"></div>
-	</div>
-
-	<div class="calendar" style="padding:10px 1px;">
-		<div id='calendar4' style="background-color:white;"></div>
-	</div>
+<div id="divider" style="float:left; border-top: thin solid #000000; height:1%; width:100%;">
 </div>
 
-<!-- AGENDA -->
-<div class="main" id="agenda_div">
-	<div class="agenda" style="">
-		<div id='agenda' style="background-color:white; padding-left:20px; padding-right:20px; padding-top:20px;"></div>
-	</div>
+<!-- CALENDAR 1&2 !-->
+<div style="width:84%; height:92%; float:left;">
+    <div class="main" id="calendar_div">
+    	<div class="calendar" id="calendar" style="">
+    		<div id='calendar1' style="background-color:white;"></div>
+    	</div>
+
+    	<div class="calendar" style="">
+    		<div id='calendar2' style="background-color:white;"></div>
+    	</div>
+
+
+    	<!-- CALENDAR 3&4 !-->
+    	<div class="calendar" style="">
+    		<div id='calendar3' style="background-color:white;"></div>
+    	</div>
+
+    	<div class="calendar" style="">
+    		<div id='calendar4' style="background-color:white;"></div>
+    	</div>
+    </div>
+
+    <!-- AGENDA -->
+    <div class="main" id="agenda_div">
+    	<div class="agenda" style="">
+    		<div id='agenda' style="background-color:white; padding-left:20px; padding-right:20px; padding-top:20px;"></div>
+    	</div>
+    </div>
+</div>
+<div id="divider" style="float:left; border-left: thin solid #000000;height:92%; width:1%;">
 </div>
 
 <!-- SCHEDULE -->
 <div class="schedule">
-    <iframe frameborder='0' scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQefSiJvjO0_hIcNLzS_ChZiPs6xM4o2jp3NfzM28HM5ONfGxBD6DqpOGmugLpEebtZZXbQZRBlTMYs/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="100%"></iframe>
-</div>
+    <iframe id="sheets" frameborder='0' scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQefSiJvjO0_hIcNLzS_ChZiPs6xM4o2jp3NfzM28HM5ONfGxBD6DqpOGmugLpEebtZZXbQZRBlTMYs/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="100%"></iframe>
+    </div>
 
 
 
